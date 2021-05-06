@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cetAsp3", "cetAsp3\cetAsp3.csproj", "{92387C74-4CFC-4B7B-9EA7-58D260C2EBBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92387C74-4CFC-4B7B-9EA7-58D260C2EBBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92387C74-4CFC-4B7B-9EA7-58D260C2EBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92387C74-4CFC-4B7B-9EA7-58D260C2EBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92387C74-4CFC-4B7B-9EA7-58D260C2EBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {970D535F-565F-458A-8161-0A2E7C6F1D84}
+	EndGlobalSection
+EndGlobal
