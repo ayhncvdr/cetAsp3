@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using cetAsp3.Models;
 
 namespace cetAsp3.Data
 {
@@ -12,5 +13,8 @@ namespace cetAsp3.Data
             : base(options)
         {
         }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<TodoItem> TodoItems { get; set; }
     }
 }
