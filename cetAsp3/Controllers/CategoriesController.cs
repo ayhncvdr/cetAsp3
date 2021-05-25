@@ -22,8 +22,8 @@ namespace cetAsp3.Controllers
         // GET: Categories
         public async Task<IActionResult> Index(SearchViewModel searchModel)
         {
-            /* var applicationDbContext2 = _context.TodoItems.Include(t => t.Category)
-                 .Where(t => showall || !t.isCompleted).OrderBy(t => t.DueDate);*/
+            /* var applicationDbContext2 = _context.TodoItems
+                 .Where(c => showall || !t.isCompleted).OrderBy(t => t.DueDate);*/
 
            
             var query = _context.Categories.FromSqlRaw("select * from Categories").AsQueryable();

@@ -43,6 +43,51 @@ namespace cetAsp3.Controllers
                searchModel.Result = await query.ToListAsync();
             return View(searchModel);
         }
+        public async Task<IActionResult> Index2(SearchViewModel searchModel)
+        {
+            /* var applicationDbContext2 = _context.TodoItems.Include(t => t.Category)
+                 .Where(t => showall || !t.isCompleted).OrderBy(t => t.DueDate);*/
+
+            var query = _context.TodoItems.Include(t => t.Category).Where(t => searchModel.ShowAll || !t.isCompleted && t.CategoryId==1).AsQueryable();
+
+            if (!searchModel.ShowAll)
+            {
+                query = query.Where(t => !t.isCompleted && t.CategoryId==1);// where t.isCompleted=0
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchModel.SearchText))
+            {
+                query = query.Where(t => t.Title.Contains(searchModel.SearchText));//where t.Title like '%searchtext%'
+            }
+
+            query = query.OrderBy(t => t.DueDate);
+
+            searchModel.Result = await query.ToListAsync();
+
+            return View(searchModel);
+        }
+        public async Task<IActionResult> Index3(SearchViewModel searchModel)
+        {
+            /* var applicationDbContext2 = _context.TodoItems.Include(t => t.Category)
+                 .Where(t => showall || !t.isCompleted).OrderBy(t => t.DueDate);*/
+
+            var query = _context.TodoItems.Include(t => t.Category).Where(t => searchModel.ShowAll || !t.isCompleted && t.CategoryId == 2).AsQueryable();
+
+            searchModel.Result = await query.ToListAsync();
+
+            return View(searchModel);
+        }
+        public async Task<IActionResult> Index4(SearchViewModel searchModel)
+        {
+            /* var applicationDbContext2 = _context.TodoItems.Include(t => t.Category)
+                 .Where(t => showall || !t.isCompleted).OrderBy(t => t.DueDate);*/
+
+            var query = _context.TodoItems.Include(t => t.Category).Where(t => searchModel.ShowAll || !t.isCompleted && t.CategoryId == 8).AsQueryable();
+
+            searchModel.Result = await query.ToListAsync();
+
+            return View(searchModel);
+        }
 
         // GET: Todo/Details/5
         public async Task<IActionResult> Details(int? id)
