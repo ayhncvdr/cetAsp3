@@ -20,9 +20,33 @@ namespace cetAsp3.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SearchViewModel searchModel)
         {
-            return View(await _context.Categories.ToListAsync());
+            /* var applicationDbContext2 = _context.TodoItems.Include(t => t.Category)
+                 .Where(t => showall || !t.isCompleted).OrderBy(t => t.DueDate);*/
+
+           
+            var query = _context.Categories.FromSqlRaw("select * from Categories").AsQueryable();
+
+            //searchmodel eklendi!!
+            
+
+           // select * from TodoItems t inner join Categories c on t.CategoryId=c.Id
+            
+            if (!searchModel.ShowinDesc)
+            {
+                query = query.Where(c => c.Name.Contains(searchModel.SearchText) );// where c.Name like '%searchtext%'
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchModel.SearchText))
+            {
+                query = query.Where(c => c.Name.Contains(searchModel.SearchText) || c.Description.Contains(searchModel.SearchText));//where c.Description like '%searchtext%'
+            }
+
+
+            // .Where(t=>!t.isCompleted).OrderBy(t=>t.DueDate);
+            searchModel.CResult = await query.ToListAsync();
+            return View(searchModel);
         }
 
         // GET: Categories/Details/5
@@ -54,7 +78,7 @@ namespace cetAsp3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Category category)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +110,7 @@ namespace cetAsp3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Category category)
         {
             if (id != category.Id)
             {
@@ -144,6 +168,31 @@ namespace cetAsp3.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> MakeDescriptionShow(int id, bool showAll)
+        {
+            showAll = true;
+            return await changeStatus(id,showAll);
+        }
+        public async Task<IActionResult> MakeInComplete(int id, bool showAll)
+        {
+            showAll = false;
+            return await changeStatus(id, showAll);
+        }
+        private async Task<IActionResult> changeStatus(int id,  bool descriptionshow)
+        {
+            var categoryItem = _context.Categories.FirstOrDefault(c => c.Id == id);
+            if (categoryItem == null)
+            {
+                return NotFound();
+            }
+
+            
+            
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), new { showall = descriptionshow });
+        }
+
 
         private bool CategoryExists(int id)
         {

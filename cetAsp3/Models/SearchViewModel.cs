@@ -9,7 +9,9 @@ namespace cetAsp3.Models
     {
         public string SearchText { get; set; }
         public bool ShowAll { get; set; }
+        public bool ShowinDesc { get; set; }    
 
         public List<TodoItem> Result { get; set; }
+        public List<Category> CResult { get; set; }
     }
 }
