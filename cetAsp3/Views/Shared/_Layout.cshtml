@@ -27,7 +27,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="Index">Todo</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Todo" asp-action="Index" asp-all-route-categoryId="2">Hobbies</a>
+                        </li>
                     </ul>
+                    <form asp-action="Index" asp-controller="Todo" method="get">
+                        <input name="SearchText" id ="SearchText"/>
+                        <input name ="ShowAll" id="ShowAll" type="hidden" value="true"/>
+                        <input type="submit" value="Search"/>
+
+                    </form>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
