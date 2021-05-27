@@ -12,6 +12,7 @@ namespace cetAsp3.Controllers
 {
     public class CategoriesController : Controller
     {
+        //deneme
         private readonly ApplicationDbContext _context;
 
         public CategoriesController(ApplicationDbContext context)
